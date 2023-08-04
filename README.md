@@ -2,6 +2,8 @@
 
 ## Description
 
+Inviting your ramblers to nansen waitlist with your ref code
+
 ## Donate
 
 ```
