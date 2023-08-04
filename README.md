@@ -23,10 +23,9 @@ pip install -r requirements.txt
 
 Open ```config.json``` file
 
-Enter your **API_KEY** from *capmonster.cloud*
+Enter your **API_KEY** from **capmonster.cloud**
 
 Enter your nansen_ref_key
-```
 
 
 ## Run
