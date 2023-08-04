@@ -73,7 +73,7 @@ class Client:
 
     async def receive_verification_link(self):
         for _ in range(4):
-            logger.info(f"Аккаунт: {self.mail} | Чекаю почту... попытка {_+1}/10")
+            logger.info(f"Аккаунт: {self.mail} | Чекаю почту... попытка {_+1}/4")
             messages_list = await self.get_messages()
             for msg in messages_list:
                 if msg['From'].find('LaunchList') != -1:
