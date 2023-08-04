@@ -30,7 +30,7 @@ Enter your nansen_ref_key
 
 ## Run
 
-To run script, open **main.py** file. 
+To run script, open ```main.py``` file. 
 
 ## Developer
 
