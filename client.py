@@ -62,6 +62,13 @@ class Client:
             return False
 
     async def get_messages(self):
+        self.mail_client.select_folder('Spam')
+        messages = self.mail_client.search()
+        messages_list = []
+        for msgid, data in self.mail_client.fetch(messages, 'RFC822').items():
+            email_message = data[b'RFC822'].decode('utf-8')
+            msg = email.message_from_string(email_message)
+            messages_list.append(msg)
         self.mail_client.select_folder('INBOX')
         messages = self.mail_client.search()
         messages_list = []
@@ -72,7 +79,7 @@ class Client:
         return messages_list
 
     async def receive_verification_link(self):
-        for _ in range(4):
+        for _ in range(10):
             logger.info(f"Аккаунт: {self.mail} | Чекаю почту... попытка {_+1}/10")
             messages_list = await self.get_messages()
             for msg in messages_list:
@@ -84,7 +91,7 @@ class Client:
                         if link.find('https://getlaunchlist.com/') != -1:
                             logger.debug(f"Аккаунт: {self.mail} | Получил ссылку верификации")
                             return link
-                await asyncio.sleep(5)
+            await asyncio.sleep(5)
         return False
 
     async def verify_nansen_account(self, verification_link):
@@ -163,7 +170,8 @@ class Client:
                     verify_account = await self.verify_nansen_account(verification_link=verification_link)
                 if not verification_link:
                     csrf_token = await self.get_csrf_token()
-                    resend_mail = await self.resend_verification_message(csrf_token=csrf_token)
-                    verification_link = await self.receive_verification_link()
-                    if verification_link:
-                        verify_account = await self.verify_nansen_account(verification_link=verification_link)
+                    if csrf_token:
+                        resend_mail = await self.resend_verification_message(csrf_token=csrf_token)
+                        verification_link = await self.receive_verification_link()
+                        if verification_link:
+                            verify_account = await self.verify_nansen_account(verification_link=verification_link)
