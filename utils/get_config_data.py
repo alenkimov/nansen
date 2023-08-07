@@ -6,10 +6,12 @@ config_path = os.path.abspath('config.json')
 with open(config_path, 'r') as file:
     config_file = json.load(file)
     capmonster_apikey = config_file['capmonster_apikey']
+    anticaptcha_apikey = config_file['anticaptcha_apikey']
     captcha_type = config_file['captcha_type']
     captcha_site_key = config_file['captcha_site_key']
     site_url = config_file['site_url']
     nansen_ref_key = config_file['nansen_ref_key']
+    processes_count = config_file['processes_count']
 
 with open('ramblers.txt', 'r') as file:
     ramblers_list = [x.rstrip() for x in file.readlines()]

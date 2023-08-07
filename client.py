@@ -1,6 +1,6 @@
 from utils.captcha_solver import get_captcha_key
 from logger.logger import logger
-from utils.get_config_data import nansen_ref_key, ramblers_iter, proxy_iter
+from utils.get_config_data import nansen_ref_key
 
 import asyncio
 import email.parser
@@ -31,7 +31,6 @@ HEADERS = {
             'sec-fetch-user': '?1',
             'sec-gpc': '1',
             'upgrade-insecure-requests': '1',
-            'user-agent': pyuseragents.random()
         }
 
 
@@ -46,6 +45,8 @@ class Client:
         else:
             self.proxy = None
         self.mail_client = None
+        self.headers = HEADERS
+        self.headers['user-agent'] = pyuseragents.random()
 
     async def connect_to_rambler(self):
         logger.info(f"Проверка почты на валидность: {self.mail}")
@@ -71,7 +72,6 @@ class Client:
             messages_list.append(msg)
         self.mail_client.select_folder('INBOX')
         messages = self.mail_client.search()
-        messages_list = []
         for msgid, data in self.mail_client.fetch(messages, 'RFC822').items():
             email_message = data[b'RFC822'].decode('utf-8')
             msg = email.message_from_string(email_message)
@@ -96,7 +96,7 @@ class Client:
 
     async def verify_nansen_account(self, verification_link):
         async with aiohttp.ClientSession() as session:
-            async with session.get(verification_link, headers=HEADERS, proxy=self.proxy) as response:
+            async with session.get(verification_link, headers=self.headers, proxy=self.proxy) as response:
                 json = await response.text()
                 if response.status == 200:
                     logger.success(f"Аккаунт: {self.mail} | Успешно подтвердил почту.")
@@ -123,7 +123,7 @@ class Client:
         }
 
         async with aiohttp.ClientSession() as session:
-            async with session.post('https://getlaunchlist.com/s/yeywGr', params=params, headers=HEADERS,
+            async with session.post('https://getlaunchlist.com/s/yeywGr', params=params, headers=self.headers,
                                  data=data, proxy=self.proxy) as response:
                 if response.status == 200:
                     logger.debug(f"Успешно отправил письмо на регистрацию. Аккаунт: {self.mail}:{self.password}")
@@ -133,7 +133,7 @@ class Client:
         try:
             async with aiohttp.ClientSession() as session:
                 HEADERS['Content-Type'] = 'text/html; charset=UTF-8'
-                async with session.get(f'https://getlaunchlist.com/s/yeywGr/{self.mail}?confetti=fire', headers=HEADERS,
+                async with session.get(f'https://getlaunchlist.com/s/yeywGr/{self.mail}?confetti=fire', headers=self.headers,
                                      proxy=self.proxy) as response:
                     text = await response.text()
                     soup = BeautifulSoup(text, 'lxml')
@@ -151,7 +151,7 @@ class Client:
                     'csrf_token': csrf_token,
                 }
                 HEADERS['Content-Type'] = 'application/json'
-                async with session.post(f'https://getlaunchlist.com/s/verify/send/{self.mail}', headers=HEADERS,
+                async with session.post(f'https://getlaunchlist.com/s/verify/send/{self.mail}', headers=self.headers,
                                      proxy=self.proxy, json=json_data) as response:
                     json = await response.json()
                     if json.get('ok'):

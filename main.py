@@ -3,7 +3,7 @@ import asyncio
 from client import Client
 from asyncio import Semaphore, create_task
 
-from utils.get_config_data import ramblers_iter, proxy_iter
+from utils.get_config_data import ramblers_iter, proxy_iter, processes_count
 from logger.logger import logger
 
 async def _process_accounts(rambler_data, proxy, semaphore):
@@ -14,7 +14,7 @@ async def _process_accounts(rambler_data, proxy, semaphore):
             logger.error(f"Аккаунт: {rambler_data} | {exc}")
 
 async def process_accounts():
-    semaphore = Semaphore(10)
+    semaphore = Semaphore(processes_count)
 
     tasks = []
     for account in ramblers_iter:
