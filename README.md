@@ -25,9 +25,11 @@ pip install -r requirements.txt
 
 Open ```config.json``` file
 
-Enter your **API_KEY** from **capmonster.cloud**
+Enter your **API_KEY** from **capmonster.cloud** or from **https://anti-captcha.com/**
 
-Enter your nansen_ref_key
+Enter your **nansen_ref_key**
+
+Enter **processes_count**. Prefer 1, because if you enter more processes - emails won't come
 
 
 ## Run
