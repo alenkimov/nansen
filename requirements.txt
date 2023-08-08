@@ -7,3 +7,4 @@ bs4~=0.0.1
 beautifulsoup4~=4.12.2
 python-anticaptcha~=1.0.0
 lxml
+capmonster-python
