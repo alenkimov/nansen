@@ -13,14 +13,7 @@ class CustomClientSession(aiohttp.ClientSession):
             cookies_list: Optional[List[dict]] = None,
             useragent: Optional[str] = None,
             **kwargs,
-    ) -> None:
-        """
-        Кастомный клиентский сеанс с поддержкой прокси, cookies и user-agent.
-        :param proxy: Объект прокси
-        :param cookies_list: Список словарей cookies
-        :param useragent: Строка user-agent
-        :param kwargs: Дополнительные аргументы для сеанса клиента
-        """
+    ):
         super().__init__(**kwargs)
         self.proxy = proxy
 
@@ -44,8 +37,4 @@ class CustomClientSession(aiohttp.ClientSession):
         )
 
     def set_useragent(self, useragent: str):
-        """
-        Устанавливает заголовок User-Agent для всех запросов.
-        :param useragent: Строка User-Agent
-        """
         self._default_headers.update({'user-agent': useragent})

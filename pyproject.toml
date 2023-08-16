@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "nansen"
-version = "0.1.3"
+version = "0.2.0"
 description = ""
 authors = ["Alen <alen.kimov@gmail.com>"]
 readme = "README.md"
@@ -16,7 +16,8 @@ pyuseragents = "^1.0.5"
 better-web3 = "^2.0.0"
 questionary = "^2.0.0"
 aioimaplib = "^1.0.1"
-rich = "^13.5.2"
+aiohttp-socks = "^0.8.0"
+python-socks = {extras = ["asyncio"], version = "^2.3.0"}
 
 
 [build-system]

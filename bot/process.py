@@ -38,6 +38,7 @@ async def _process_accounts_with_session(
             else:
                 account_info = f"[{email}]"
 
+            # await fn(session, account)
             try:
                 await fn(session, account)
             except Exception as e:
