@@ -10,7 +10,7 @@ class Config(BaseModel):
     ANTICAPTCHA_API_KEY: str
     RETRIES: int = 5
     AUTOOPEN: bool = True
-    # MAX_TASKS: int = 10
+    MAX_TASKS: int = 3
 
 
 class ServiceData(BaseModel):
