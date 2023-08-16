@@ -1,0 +1,4 @@
+LOGGING_LEVEL = "INFO"  # ["INFO", "DEBUG"]
+RETRIES = 5  # 1 retry == 10 secs
+AUTOOPEN = true
+ANTICAPTCHA_API_KEY = ""

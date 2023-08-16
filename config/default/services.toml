@@ -1,0 +1,9 @@
+["Rambler"]
+host = "imap.rambler.ru"
+folders = ["Spam", "INBOX"]
+domains = ["@rambler.ru"]
+
+["Outlook"]
+host = "outlook.office365.com"
+folders = ["INBOX"]
+domains = ["@hotmail.com", "outlook.com"]

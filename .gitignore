@@ -1,3 +1,8 @@
-
-utils/__pycache__/__init__.cpython-311.pyc
-*.pyc
+.idea
+.venv
+log
+input
+output
+settings
+config/*
+!config/default
