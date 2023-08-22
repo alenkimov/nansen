@@ -1,5 +1,5 @@
 # nansen waitlist script
-[ [Telegram канал](https://t.me/cum_insider) ]
+[![Telegram channel](https://img.shields.io/endpoint?url=https://runkit.io/damiankrawczyk/telegram-badge/branches/master?url=https://t.me/cum_insider)](https://t.me/cum_insider)
 
 - [Запуск под Windows](#Запуск-под-Windows)
 - [Запуск под Ubuntu](#Запуск-под-Ubuntu)
